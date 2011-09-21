@@ -46,6 +46,9 @@
     .rbox .shell{
       color: #00750B;
     }
+    span.red{
+      color: red;
+    }
   </style>
 </head>
 
@@ -81,7 +84,7 @@
     </div>
 
     <h2>4. Update the Rakefile in your favorite editor</h2>
-    This file will be translated into the gem's gemspec.  Update the summary, description, email and authors
+    This file will be translated into the gem's gemspec.  Update the summary, description, email and authors with your own information.<br/>  <span class="red"><b>NOTE:</b> Jeweler will not generate your gemspec if you have TODO or FIXME in the description and summary, so you will need to change these attributes.</span>
     <script src="https://gist.github.com/1230996.js?file=Rakefile"></script>
 
     <h2>5. create a VERSION file</h2>
@@ -102,34 +105,34 @@
       <span class="shell">winning$</span> mkdir lib/acts_as_charlie_sheen
     </div>
 
-    <h2>8. Create a ruby file in lib/acts_as_charlie_sheen/base.rb and add some code</h2>
-    This file will be loaded by the root ruby file in the gem.  Most gem developers have a root ruby file that includes all of the ruby modules and classes inside lib/gem_name/.
+    <h2>8. Create a ruby file and add some code</h2>
+    Add "base.rb" to "/lib/acts_as_charlie_sheen/".  This file will be loaded by the root ruby file in the gem.  Many gem developers use a root ruby file that requires all of the ruby modules and classes inside lib/gem_name/.
     <script src="https://gist.github.com/1231109.js?file=base.rb"></script>
     
     <h2>9. Create a Railtie in lib/acts_as_charlie_sheen/</h2>
     <script src="https://gist.github.com/1231112.js?file=railtie.rb"></script>
 
-    This allows it to load your gem into rails, just by including it in your Gemfile.  The main benefit of using a Railtie is that it provides you access to the Rails initialization process</h2>
+    This allows the Rails boot process to load your gem into your Rails app, just by including it in your Gemfile.  The main benefit of using a Railtie is that it provides you access to the Rails initialization process</h2>
 
     <h2>10. Require the Railtie and your code</h2>
-    Your entry point file is lib/acts_as_charlie_sheen.rb.  This file will be loaded when your gem is required, so you need to require all other ruby files within this file.
+    Your entry point file is lib/acts_as_charlie_sheen.rb.  This file will be loaded when your gem is required in an app.  You will need to require all other ruby files within this file in order for them to be used in your app.
     <script src="https://gist.github.com/1231053.js?file=acts_as_charlie_sheen.rb"></script>
 
     <h2>11. Bump your version to 0.0.1</h2>
-    Now that you have some code in your gem, let's go ahead and do an early release.  Jeweler has rake tasks that will bump your VERSION file for major, minor or patch versions.
+    Now that you have some code in your gem, let's go ahead and do an early release.  Jeweler has rake tasks that will bump your VERSION file for major, minor or patch versions.  Bump the patch version to 0.0.1
 
     <div class="rbox">
       <span class="shell">winning$</span> rake version:bump:patch
     </div>
     
-    <h2>12. Add and commit code to git</h2>
+    <h2>12. Add and commit your code to git</h2>
     <div class="rbox">
       <span class="shell">winning$</span> git add .<br/>
       <span class="shell">winning$</span> git commit -m 'first commit'
     </div>
     
     <h2>13. Create a github repo for the gem</h2>
-    Sign in to github under the account name you put in your Rakefile/Gemspec and add a new repository called acts_as_charlie_sheen
+    Sign in to github under the account name you specified in your Rakefile/Gemspec and add a new repository called acts_as_charlie_sheen
 
     <h2>14. Release your gem to github</h2>
     Now that you have some code and bumped your version to 0.0.1, you can push it to github.  The following rake commands will generate a gemspec, push the gemspec to github and then create a git tag and push to your github repo
@@ -147,17 +150,17 @@
     </div>
     
     <h2>16. Add it to your Gemfile</h2>
-
+    <span class="red"><b>NOTE:</b> Change this line, so that it points to your github account instead of "your_username"</span>
     <script src="https://gist.github.com/1231077.js?file=Gemfile"></script>
 
     <h2>17. Install w/ bundler</h2>
-    
+    This will install the gem in your Rails app
     <div class="rbox">
       <span class="shell">winning$</span> bundle install
     </div>
 
     <h2>18. Scaffold a Person and run the migration</h2>
-    
+    You need to create this model, so we can make it act like charlie sheen
     <div class="rbox">
       <span class="shell">winning$</span> rails g scaffold person<br/>
       <span class="shell">winning$</span> rake db:migrate
@@ -167,7 +170,7 @@
     <script src="https://gist.github.com/1231091.js?file=person.rb"></script>
 
     <h2>20. Edit the Person show view</h2>
-    To see the gem in action, you will need to add the instance method to the show view.  Edit app/views/people/show.html.erb:
+    To see the gem in action, you will need to add the instance method to the show view.  Edit "app/views/people/show.html.erb":
     <script src="https://gist.github.com/1231102.js?file=show.html.erb"></script>
     
     <h2>21. Fire up the server and test it out in your browser</h2>
@@ -176,7 +179,7 @@
       <span class="shell">winning$</span> rails s
     </div>
     
-    Open up your favorite browser and type in this URL:  http://localhost/people
+    Open up your favorite browser and type in this URL:  <br/><a href="http://localhost:3000/people">http://localhost:3000/people</a><br/>
     Add a person and then navigate to the show view
 
     <div class="footer">
