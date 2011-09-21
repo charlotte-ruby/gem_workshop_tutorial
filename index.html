@@ -3,30 +3,49 @@
 <head>
   <meta charset='utf-8'>
 
-  <title>charlotte-ruby/gem_workshop_tutorial @ GitHub</title>
+  <title>Charlotte Ruby Gem Workshop</title>
 
   <style type="text/css">
     body {
       margin-top: 1.0em;
-      background-color: #e0c2f2;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
+      background-color: #eee;
+      font-family: 'Helvetica Neue', Helvetica, Arial, FreeSans, san-serif;
       color: #000000;
     }
     #container {
       margin: 0 auto;
-      width: 700px;
+      width: 900px;
     }
-    h1 { font-size: 3.8em; color: #1f3d0d; margin-bottom: 3px; }
+    h1 { font-size: 3em; color: #333; margin-bottom: 3px; text-align:center;}
     h1 .small { font-size: 0.4em; }
     h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #1f3d0d; }
-    h3 { text-align: center; color: #1f3d0d; }
-    a { color: #1f3d0d; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
+    h2 { font-size: 1.5em; color: #333; }
+    h3 {color: #fff; padding: 10px; background-color: #444;}
+    a { color: #333; }
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
+    .gist{
+      margin: 10px 0;
+      font-size: 12px;
+      font-family: 'Bitstream Vera Sans Mono', Courier, monospace;
+    }
+    .gist .gist-file .gist-data pre{
+      padding: 10px !important;
+    }
+    .rbox {
+      margin: 15px 0;
+      padding: 15px;
+      border: 1px solid #D2D2D2;
+      background-color: white;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+      font-family: 'Bitstream Vera Sans Mono', Courier, monospace;
+      font-size: 14px;
+    }
+    .rbox .shell{
+      color: #00750B;
+    }
   </style>
 </head>
 
@@ -35,34 +54,130 @@
 
   <div id="container">
 
-    <div class="download">
-      <a href="http://github.com/charlotte-ruby/gem_workshop_tutorial/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/charlotte-ruby/gem_workshop_tutorial/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+    <h1><a href="http://github.com/charlotte-ruby/gem_workshop_tutorial">Charlotte Ruby Gem Workshop</a>
+
+
+    <h2>Creating a simple gem for Rails using Jeweler</h2>
+    <h3>acts_as_charlie_sheen</h3>
+    
+    <h2>Requirements: ruby & a github account
+    
+    <h2>1. Install Jeweler</h2>
+    Open up your shell and install and run this command:
+
+    <div class="rbox">
+      <span class="shell">winning$</span> gem install jeweler
     </div>
 
-    <h1><a href="http://github.com/charlotte-ruby/gem_workshop_tutorial">gem_workshop_tutorial</a>
-      <span class="small">by <a href="http://github.com/charlotte-ruby">charlotte-ruby</a></span></h1>
-
-    <div class="description">
-      
+    <h2>2. Create gem skelaton</h2>
+    <div class="rbox">
+      <span class="shell">winning$</span> jeweler acts_as_charlie_sheen
     </div>
 
-    <h2>Contact</h2>
-<p>Charlotte Ruby Group (john@myheatmap.com)<br/>      </p>
+    <h2>3. Navigate to the gem directory and run bundle install</h2>
+    <div class="rbox">
+      <span class="shell">winning$</span> cd acts_as_charlie_sheen<br/>
+      <span class="shell">winning$</span> bundle install
+    </div>
 
+    <h2>4. Update the Rakefile in your favorite editor</h2>
+    This file will be translated into the gem's gemspec.  Update the summary, description, email and authors
+    <script src="https://gist.github.com/1230996.js?file=Rakefile"></script>
 
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/charlotte-ruby/gem_workshop_tutorial/zipball/master">zip</a> or
-      <a href="http://github.com/charlotte-ruby/gem_workshop_tutorial/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/charlotte-ruby/gem_workshop_tutorial</pre>
-    </p>
+    <h2>5. create a VERSION file</h2>
+    Jeweler includes a rake task that will create a flat file named VERSION.  This file includes only the version number.  Jeweler will start the VERSION file at version 0.0.0
+    <div class="rbox">
+      <span class="shell">winning$</span> rake version:write
+    </div>
+
+    <h2>6. create the gemspec</h2>
+    Let's go ahead and create the gemspec using another Jeweler rake task
+    <div class="rbox">
+      <span class="shell">winning$</span> rake gemspec
+    </div>
+
+    <h2>7. Add a directory for your code</h2>
+
+    <div class="rbox">
+      <span class="shell">winning$</span> mkdir lib/acts_as_charlie_sheen
+    </div>
+
+    <h2>8. Create a ruby file in lib/acts_as_charlie_sheen/base.rb and add some code</h2>
+    This file will be loaded by the root ruby file in the gem.  Most gem developers have a root ruby file that includes all of the ruby modules and classes inside lib/gem_name/.
+    <script src="https://gist.github.com/1231109.js?file=base.rb"></script>
+    
+    <h2>9. Create a Railtie in lib/acts_as_charlie_sheen/</h2>
+    <script src="https://gist.github.com/1231112.js?file=railtie.rb"></script>
+
+    This allows it to load your gem into rails, just by including it in your Gemfile.  The main benefit of using a Railtie is that it provides you access to the Rails initialization process</h2>
+
+    <h2>10. Require the Railtie and your code</h2>
+    Your entry point file is lib/acts_as_charlie_sheen.rb.  This file will be loaded when your gem is required, so you need to require all other ruby files within this file.
+    <script src="https://gist.github.com/1231053.js?file=acts_as_charlie_sheen.rb"></script>
+
+    <h2>11. Bump your version to 0.0.1</h2>
+    Now that you have some code in your gem, let's go ahead and do an early release.  Jeweler has rake tasks that will bump your VERSION file for major, minor or patch versions.
+
+    <div class="rbox">
+      <span class="shell">winning$</span> rake version:bump:patch
+    </div>
+    
+    <h2>12. Add and commit code to git</h2>
+    <div class="rbox">
+      <span class="shell">winning$</span> git add .<br/>
+      <span class="shell">winning$</span> git commit -m 'first commit'
+    </div>
+    
+    <h2>13. Create a github repo for the gem</h2>
+    Sign in to github under the account name you put in your Rakefile/Gemspec and add a new repository called acts_as_charlie_sheen
+
+    <h2>14. Release your gem to github</h2>
+    Now that you have some code and bumped your version to 0.0.1, you can push it to github.  The following rake commands will generate a gemspec, push the gemspec to github and then create a git tag and push to your github repo
+    <div class="rbox">
+      <span class="shell">winning$</span> rake gemspec:release<br/>
+      <span class="shell">winning$</span> rake git:release
+    </div>
+
+    <h2>15. Create a new Rails app</h2>
+    Navigate to a directory outside your gem and create a new Rails app.  
+    <div class="rbox">
+      <span class="shell">winning$</span> cd /some_other_directory<br/>
+      <span class="shell">winning$</span> rails new my_app<br/>
+      <span class="shell">winning$</span> cd /my_app<br/>
+    </div>
+    
+    <h2>16. Add it to your Gemfile</h2>
+
+    <script src="https://gist.github.com/1231077.js?file=Gemfile"></script>
+
+    <h2>17. Install w/ bundler</h2>
+    
+    <div class="rbox">
+      <span class="shell">winning$</span> bundle install
+    </div>
+
+    <h2>18. Scaffold a Person and run the migration</h2>
+    
+    <div class="rbox">
+      <span class="shell">winning$</span> rails g scaffold person<br/>
+      <span class="shell">winning$</span> rake db:migrate
+    </div>
+    
+    <h2>19. Make the model act like Charlie Sheen</h2>
+    <script src="https://gist.github.com/1231091.js?file=person.rb"></script>
+
+    <h2>20. Edit the Person show view</h2>
+    To see the gem in action, you will need to add the instance method to the show view.  Edit app/views/people/show.html.erb:
+    <script src="https://gist.github.com/1231102.js?file=show.html.erb"></script>
+    
+    <h2>21. Fire up the server and test it out in your browser</h2>
+
+    <div class="rbox">
+      <span class="shell">winning$</span> rails s
+    </div>
+    
+    Open up your favorite browser and type in this URL:  http://localhost/people
+    Add a person and then navigate to the show view
 
     <div class="footer">
       get the source code on GitHub : <a href="http://github.com/charlotte-ruby/gem_workshop_tutorial">charlotte-ruby/gem_workshop_tutorial</a>
